@@ -1,61 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- AOS CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+
+  <style>
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeUp {
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+  </style>
 </head>
-<body>
-   <div id="weatherApp"
-    class="min-h-screen bg-[#22797A] bg-cover bg-no-repeat transition-[background-image] duration-500 ease-in-out"
-    
-    >
-        <div class="main-display">
-            <div class="day-time">
-                <p id="day"></p>
-                <p id="time"></p>
-            </div>
-            <div class="date-div">
-                <p id="date"></p>
-            </div>
-        </div>
-        <div class="weather-display">
-            <div class="weather-info">
-                <p id="location"></p>
-                <p id="temperature"></p>
-                <p id="condition"></p>
-            </div>
-        </div>
-        <div class="forecast">
-            <div class="forecast-item">
-                <p id="forecast-day1"></p>
-                <p id="forecast-temp1"></p>
-                <p id="forecast-condition1"></p>
-                <p id="forecast-city"></p>
-            </div>
-            <div class="forecast-item">
-                <p id="forecast-day2"></p>
-                <p id="forecast-temp2"></p>
-                <p id="forecast-condition2"></p>
-                <p id="forecast-city"></p>
-            </div>
-            <div class="forecast-item">
-                <p id="forecast-day3"></p>
-                <p id="forecast-temp3"></p>
-                <p id="forecast-condition3"></p>
-                <p id="forecast-city"></p>
-            </div>
-             <div class="forecast-item">
-                <p id="forecast-day3"></p>
-                <p id="forecast-temp3"></p>
-                <p id="forecast-condition3"></p>
-                <p id="forecast-city"></p>
-            </div>
+<body class="min-h-screen bg-[#22797A] flex items-center justify-center p-4">
+
+  <div id="weatherApp" class="w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-lg shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2">
+
+    <!-- Left Section -->
+    <div class="relative flex flex-col justify-between bg-cover bg-center p-6 text-white animate-fadeUp" style="background-image: url(`${image}`);">
+      <div class="day-time space-y-1">
+        <p id="day" class="text-red-300 font-medium text-lg"></p>
+        <p id="time" class="text-red-200 text-sm"></p>
+      </div>
+      <div class="mt-auto">
+        <p id="temperature" class="text-6xl font-bold"></p>
+        <p id="location" class="text-lg"></p>
+        <p id="condition" class="text-sm mt-1"></p>
+      </div>
+    </div>
+
+    <!-- Right Section -->
+    <div class="bg-white/10 backdrop-blur-lg p-6 text-white space-y-4">
+      <p class="text-lg font-semibold mb-4 animate-fadeUp">Next Days</p>
+
+      <div class="forecast space-y-4">
+        <!-- Day 1 -->
+        <div class="forecast-item flex justify-between items-center border-b border-white/20 pb-2 animate-fadeUp" style="animation-delay: 0.2s;">
+          <div>
+            <p id="forecast-temp1" class="text-xl font-bold"></p>
+            <p id="forecast-condition1" class="text-sm"></p>
+          </div>
+          <div class="text-right">
+            <p id="forecast-day1" class="font-medium"></p>
+            <p class="text-xs"></p>
+          </div>
         </div>
 
-   </div>
-    
-   <script src="script.js"></script>
+        <!-- Day 2 -->
+        <div class="forecast-item flex justify-between items-center border-b border-white/20 pb-2 animate-fadeUp" style="animation-delay: 0.4s;">
+          <div>
+            <p id="forecast-temp2" class="text-xl font-bold"></p>
+            <p id="forecast-condition2" class="text-sm"></p>
+          </div>
+          <div class="text-right">
+            <p id="forecast-day2" class="font-medium"></p>
+            <p class="text-xs"></p>
+          </div>
+        </div>
+
+        <!-- Day 3 -->
+        <div class="forecast-item flex justify-between items-center border-b border-white/20 pb-2 animate-fadeUp" style="animation-delay: 0.6s;">
+          <div>
+            <p id="forecast-temp3" class="text-xl font-bold"></p>
+            <p id="forecast-condition3" class="text-sm"></p>
+          </div>
+          <div class="text-right">
+            <p id="forecast-day3" class="font-medium"></p>
+            <p class="text-xs"></p>
+          </div>
+        </div>
+
+        <!-- Day 4 -->
+        <div class="forecast-item flex justify-between items-center animate-fadeUp" style="animation-delay: 0.8s;">
+          <div>
+            <p id="forecast-temp4" class="text-xl font-bold"></p>
+            <p id="forecast-condition4" class="text-sm"></p>
+          </div>
+          <div class="text-right">
+            <p id="forecast-day4" class="font-medium"></p>
+            <p class="text-xs"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  
+  <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <!-- Your Weather Script -->
+  <script src="script.js"></script>
+
 </body>
 </html>

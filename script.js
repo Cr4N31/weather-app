@@ -30,6 +30,25 @@ const backgrounds = {
   },  
 };  
 
+// 🌐 Weather icon mapping (Weather Icons CDN)
+const iconMap = {
+  sunny: "wi-day-sunny",
+  clear: "wi-night-clear",
+  cloudy: "wi-cloudy",
+  "partly cloudy": "wi-day-cloudy",
+  rainy: "wi-rain",
+  snow: "wi-snow",
+};
+
+
+// 🌀 Show/Hide loader
+function showLoader() {
+  document.getElementById("loading").classList.remove("hidden");
+}
+function hideLoader() {
+  document.getElementById("loading").classList.add("hidden");
+}
+
 // Live date/time updater
 function updateTime() {  
   const now = new Date();  
@@ -38,6 +57,8 @@ function updateTime() {
 }  
 updateTime();  
 setInterval(updateTime, 1000);  
+
+
 
 // Update weather UI
 function updateUI(data) {  
@@ -102,6 +123,33 @@ async function fetchWeather(location) {
     console.error("Error fetching weather:", error);  
   }  
 }  
+
+async function fetchLocalTime(location) {
+  try{
+    const res = await 
+    fetch("https://worldtimeapi.org/api/timezone/${`location`}");
+    const data = await res.json();
+    return data.datetime;
+  } catch (error) {
+     console.error("error loading time")
+  }
+}
+
+
+// 🔍 Search handler
+const searchForm = document.getElementById("search-form");
+if (searchForm) {
+  searchForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const input = document.getElementById("search-input");
+    const location = input.value.trim();
+    if (location) {
+      fetchWeather(location);
+      input.value = "";
+    }
+  });
+}
+
 
 // Default city  
 fetchWeather("Lagos");  

@@ -7,6 +7,11 @@
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!--Timezone API-->
+  <script src="https://worldtimeapi.org/api/timezone/"></script>
+  <!-- Weather Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css" />
+
   
   <!-- AOS CSS -->
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
@@ -19,11 +24,38 @@
     .animate-fadeUp {
       animation: fadeUp 0.8s ease-out forwards;
     }
+
+     .glass {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    #loading {
+      backdrop-filter: blur(10px);
+    }
   </style>
 </head>
-<body class="min-h-screen bg-[#22797A] flex items-center justify-center p-4">
+<body class="min-h-screen bg-[#22797A] text-white flex items-center justify-center p-4">
+
+   <!-- Loader -->
+  <div id="loading" class="fixed inset-0 bg-black/60 flex items-center justify-center z-100 hidden">
+    <div class="text-white text-xl font-medium animate-pulse">Fetching weather data...</div>
+  </div>
 
   <div id="weatherApp" class="w-full max-w-4xl bg-white/10 backdrop-blur-lg rounded-lg shadow-lg overflow-hidden grid grid-cols-1 md:grid-cols-2">
+      <!--Search Bar-->
+     <form id="search-form" class="flex h-fit justify-center gap-4 mb-8" data-aos="fade-down">
+      <input
+        id="search-input"
+        type="text"
+        placeholder="Enter city..."
+        class="w-full px-4 py-2 rounded-lg border-none bg-white/10 text-white placeholder-white/60 focus:outline-none"
+      />
+      <button type="submit" class="bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg text-white font-medium">
+        Search
+      </button>
+    </form>
 
     <!-- Left Section -->
     <div class="relative flex flex-col justify-between bg-cover bg-center p-6 text-white animate-fadeUp" style="background-image: url(`${image}`);">
@@ -32,6 +64,7 @@
         <p id="time" class="text-red-200 text-sm"></p>
       </div>
       <div class="mt-auto">
+        <i id="weather-icon" class="wi text-white text-6xl mb-2"></i>
         <p id="temperature" class="text-6xl font-bold"></p>
         <p id="location" class="text-lg"></p>
         <p id="condition" class="text-sm mt-1"></p>
